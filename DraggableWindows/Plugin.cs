@@ -18,21 +18,25 @@ namespace DraggableWindows
         [Obsolete]
         private void Init()
         {
-            Sprite buttonSprite;
-            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("ChromapperPlugin.ShiftToggleButton.png"))
+            try
             {
-                var len = (int)stream.Length;
-                var bytes = new byte[len];
-                stream.Read(bytes, 0, len);
+                Sprite buttonSprite;
+                using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DraggableWindows.ShiftToggleButton.png"))
+                {
+                    var len = (int)stream.Length;
+                    var bytes = new byte[len];
+                    stream.Read(bytes, 0, len);
 
-                Texture2D texture2D = new Texture2D(512, 512);
-                texture2D.LoadImage(bytes);
+                    Texture2D texture2D = new Texture2D(512, 512);
+                    texture2D.LoadImage(bytes);
 
-                buttonSprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), new Vector2(0, 0), 100.0f, 0, SpriteMeshType.Tight);
-            }
-            SceneManager.sceneLoaded += SceneLoaded;
-            ExtensionButton shiftToggleButton = ExtensionButtons.AddButton(buttonSprite, "Toggle Shift+Drag when dragging windows", ToggleShiftDrag);
+                    buttonSprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), new Vector2(0, 0), 100.0f, 0, SpriteMeshType.Tight);
+                }
+                SceneManager.sceneLoaded += SceneLoaded;
+                ExtensionButton shiftToggleButton = ExtensionButtons.AddButton(buttonSprite, "Toggle Shift+Drag when dragging windows", ToggleShiftDrag);
+            }catch (Exception ex) { Debug.LogError(ex.Message + ex.StackTrace); }
         }
+
 
         [Obsolete]
         private void SceneLoaded(Scene arg0, LoadSceneMode arg1)
