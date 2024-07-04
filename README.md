@@ -10,7 +10,6 @@ You can also now switch between using Shift and Click to drag or just click to d
 ![Preview](https://github.com/Nibbl-z/Chromapper-DraggableWindows/blob/main/Preview.png?raw=true)
 
 # Known Issues
-- Switching between Shift+Click to drag might make the window not draggable until it is reopened and closed
-- Some windows after being dragged down do not go fully out of screen when closed
-
-also i've never used github before so i don't really know what i'm doing x2
+- Strobe Generator Window only remembers horizontal position when you close the window and reopen it.
+- Color Selection Window doesn't fully hide itself and is a bit slow to disapear.
+- Bpm Tapper 'opens/closes with right shift key' does not fully hide window when closed after benig dragged vertically up.
