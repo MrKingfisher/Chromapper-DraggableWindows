@@ -14,10 +14,15 @@ namespace DraggableWindows
     public class Plugin
     {
         public bool shiftEnabled = false;
+        protected const string DraggableWindowsSettingsFile = "DraggableWindowsSettings.json";
         [Init]
         [Obsolete]
         private void Init()
         {
+            // HUH? THIS LOOKS KINDA UGLY BUT IS USEFULL
+            CheckChromapperVersion();
+            EnsureJsonfileExists();
+
             try
             {
                 Sprite buttonSprite;
@@ -36,7 +41,6 @@ namespace DraggableWindows
                 ExtensionButton shiftToggleButton = ExtensionButtons.AddButton(buttonSprite, "Toggle Shift+Drag when dragging windows", ToggleShiftDrag);
             }catch (Exception ex) { Debug.LogError(ex.Message + ex.StackTrace); }
         }
-
 
         [Obsolete]
         private void SceneLoaded(Scene arg0, LoadSceneMode arg1)
@@ -83,16 +87,75 @@ namespace DraggableWindows
 
             JSONObject saveJson = new JSONObject();
             saveJson.Add("ShiftEnabled", shiftEnabled);
-            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             string path = Application.persistentDataPath + "/DraggableWindowsSettings.json";
             File.WriteAllText(path, saveJson.ToString());
         }
-
         public void AddDraggable(GameObject ui, GameObject parentUi)
         {
             Debug.Log("creating draggable");
             ui.AddComponent<DragWindow>();
             ui.GetComponent<DragWindow>().canvas = parentUi.GetComponent<Canvas>();
         }
+        // if build version < current version of chromapper we warn user of potential bugs n such
+        private void CheckChromapperVersion()
+        {
+            string appVersion = Application.version;
+            string assemblyBuildReleaseVersion = GetAssemblyBuildReleaseVersion();
+
+            if (assemblyBuildReleaseVersion != null)
+            {
+                // Compare the versions
+                int comparisonResult = CompareVersions(appVersion, assemblyBuildReleaseVersion);
+
+                if (comparisonResult != 0)
+                {
+                    Debug.LogError("Warning! Plugin was built on Chromapper Version: " + assemblyBuildReleaseVersion + "\n" +
+                        "Your version of Chromapper is: " + appVersion + " and may not work properly or even at all.");
+                    PersistentUI.Instance.DisplayMessage("Plugin Version Mismatch. \n please read console output", PersistentUI.DisplayMessageType.Bottom);
+                }
+            }
+            else
+            {
+                Debug.LogError("AssemblyBuildReleaseVersion attribute not found. something bad happend Please send log if possible");
+            }
+
+        }
+
+        // a bit overkill but if some users believe they get banned from mapping due to plugin mismatch
+        // then this is for a good reason
+        private string GetAssemblyBuildReleaseVersion()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var attribute = assembly.GetCustomAttribute<AssemblyBuildReleaseVersionAttribute>();
+
+            return attribute?.Version;
+        }
+
+        // compare versions
+        private int CompareVersions(string appVersion, string pluginVersion)
+        {
+            Version appVer = new Version(appVersion);
+            Version pluginVer = new Version(pluginVersion);
+
+            return appVer.CompareTo(pluginVer);
+        }
+
+        // Locate Appdata folder for chromapper
+        public static string GetAppdataFolder()
+        {
+            return Application.persistentDataPath.ToString();
+        }
+        private void EnsureJsonfileExists()
+        {
+            string AppdataPath = GetAppdataFolder();
+            if (!File.Exists(AppdataPath + "\\" + DraggableWindowsSettingsFile))
+            {
+                // Create Json file under app data if not found
+                File.Create(AppdataPath + "\\" + DraggableWindowsSettingsFile);
+                Debug.Log(DraggableWindowsSettingsFile + " has been created in: " + AppdataPath);
+            }
+        }
+
     }
+
 }
