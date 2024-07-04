@@ -83,7 +83,7 @@ namespace DraggableWindows
 
             JSONObject saveJson = new JSONObject();
             saveJson.Add("ShiftEnabled", shiftEnabled);
-
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             string path = Application.persistentDataPath + "/DraggableWindowsSettings.json";
             File.WriteAllText(path, saveJson.ToString());
         }
