@@ -29,7 +29,7 @@ public class DragWindow : MonoBehaviour, IDragHandler
     {
         string path = Application.persistentDataPath + "/DraggableWindowsSettings.json";
         string settingsJsonFile = File.ReadAllText(path);
-        JSONObject settingsJson = (JSONObject)JSON.Parse(settingsJsonFile);
-        return settingsJson["ShiftEnabled"];
+        JSONObject settingsJson = JSON.Parse(settingsJsonFile) as JSONObject;
+        return settingsJson?["ShiftEnabled"] ?? false;
     }
 }

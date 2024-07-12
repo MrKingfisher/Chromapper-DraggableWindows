@@ -148,10 +148,10 @@ namespace DraggableWindows
         private void EnsureJsonfileExists()
         {
             string AppdataPath = GetAppdataFolder();
-            if (!File.Exists(AppdataPath + "\\" + DraggableWindowsSettingsFile))
+            if (!File.Exists(AppdataPath + "/" + DraggableWindowsSettingsFile))
             {
                 // Create Json file under app data if not found
-                File.Create(AppdataPath + "\\" + DraggableWindowsSettingsFile);
+                File.Create(AppdataPath + "/" + DraggableWindowsSettingsFile);
                 Debug.Log(DraggableWindowsSettingsFile + " has been created in: " + AppdataPath);
             }
         }
