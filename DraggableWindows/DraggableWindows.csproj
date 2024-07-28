@@ -47,9 +47,8 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Unity.InputSystem, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Downloads\chromapper\ChroMapper_Data\Managed\Unity.InputSystem.dll</HintPath>
+    <Reference Include="Unity.InputSystem">
+      <HintPath>$(ChromapperDir)\ChroMapper_Data\Managed\Unity.InputSystem.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
       <HintPath>$(ChromapperDir)\ChroMapper_Data\Managed\UnityEngine.dll</HintPath>
