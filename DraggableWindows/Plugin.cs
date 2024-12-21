@@ -111,7 +111,6 @@ namespace DraggableWindows
                 {
                     Debug.LogError("Warning! Plugin was built on Chromapper Version: " + assemblyBuildReleaseVersion + "\n" +
                         "Your version of Chromapper is: " + appVersion + " and may not work properly or even at all.");
-                    PersistentUI.Instance.DisplayMessage("Plugin Version Mismatch. \n please read console output", PersistentUI.DisplayMessageType.Bottom);
                 }
             }
             else
