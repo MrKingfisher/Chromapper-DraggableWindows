@@ -87,7 +87,7 @@ namespace DraggableWindows
 
             JSONObject saveJson = new JSONObject();
             saveJson.Add("ShiftEnabled", shiftEnabled);
-            string path = Application.persistentDataPath + "/DraggableWindowsSettings.json";
+            var path = Application.persistentDataPath + "/DraggableWindowsSettings.json";
             File.WriteAllText(path, saveJson.ToString());
         }
         public void AddDraggable(GameObject ui, GameObject parentUi)
@@ -99,9 +99,9 @@ namespace DraggableWindows
         // if build version < current version of chromapper we warn user of potential bugs n such
         private void CheckChromapperVersion()
         {
-            string appVersion = Application.version;
-            string assemblyBuildReleaseVersion = GetAssemblyBuildReleaseVersion();
-
+            var appVersion = Application.version;
+            var assemblyBuildReleaseVersion = GetAssemblyBuildReleaseVersion();
+            var assembleTitle = GetAssembleTitle();
             if (assemblyBuildReleaseVersion != null)
             {
                 // Compare the versions
@@ -109,7 +109,7 @@ namespace DraggableWindows
 
                 if (comparisonResult != 0)
                 {
-                    Debug.LogError("Warning! Plugin was built on Chromapper Version: " + assemblyBuildReleaseVersion + "\n" +
+                    Debug.LogError("Warning! Plugin: "+ assembleTitle +" was built on Chromapper Version: " + assemblyBuildReleaseVersion + "\n" +
                         "Your version of Chromapper is: " + appVersion + " and may not work properly or even at all.");
                 }
             }
@@ -128,6 +128,13 @@ namespace DraggableWindows
             var attribute = assembly.GetCustomAttribute<AssemblyBuildReleaseVersionAttribute>();
 
             return attribute?.Version;
+        }
+        private string GetAssembleTitle()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var attribute = assembly.GetCustomAttribute<AssemblyTitleAttribute>();
+
+            return attribute?.Title;
         }
 
         // compare versions
