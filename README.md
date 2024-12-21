@@ -7,7 +7,7 @@ This plugin allows you to drag around different windows in ChroMapper that may g
 
 You can also now switch between using Shift and Click to drag or just click to drag!
 
-![Preview](https://github.com/Nibbl-z/Chromapper-DraggableWindows/blob/main/Preview.png?raw=true)
+![Preview](https://github.com/MrKingfisher/Chromapper-DraggableWindows/blob/main/Preview.png?raw=true)
 
 # Known Issues
 - Strobe Generator Window only remembers horizontal position when you close the window and reopen it.
