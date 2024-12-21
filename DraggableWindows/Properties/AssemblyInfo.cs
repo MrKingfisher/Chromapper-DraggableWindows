@@ -16,7 +16,7 @@ using System.Runtime.InteropServices;
 
 // Custom assembly via AssemblyBuildReleaseVersionAttribute.cs
 // this is so we can compare build version of plugin vs chromapper version and warn user  of mismatch.
-[assembly: AssemblyBuildReleaseVersion("0.10.779")] // <-- hopefully it will be updated upon build of current buld version of chromapper
+[assembly: AssemblyBuildReleaseVersion("0.11.793")] // <-- hopefully it will be updated upon build of current buld version of chromapper
 
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from
@@ -36,5 +36,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.2.2.0")]
-[assembly: AssemblyFileVersion("1.2.2.0")]
+[assembly: AssemblyVersion("1.2.3.0")]
+[assembly: AssemblyFileVersion("1.2.3.0")]
